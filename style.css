@@ -1,0 +1,90 @@
+/* ==========================================
+   Riverbend Yoga Studio - MUJI Inspired Style
+   ========================================== */
+
+:root {
+    /* MUJI-inspired natural & earth green color palette */
+    --bg-color: #F4F3EE;        /* Cream / Off-white (Background) */
+    --text-color: #2C332E;      /* Dark moss gray (Body text) */
+    --primary-color: #4A5D4E;   /* Earth green (Headings & headers) */
+    --accent-color: #D3CBC0;    /* Sand beige (Borders & dividers) */
+
+    /* Typography settings (Optimized for Windows and general devices) */
+    --main-font: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Meiryo", sans-serif;
+}
+
+/* Global page settings */
+body {
+    font-family: var(--main-font);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+}
+
+/* Header and Navigation */
+header {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid var(--accent-color);
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* Main content layout (Flexbox) */
+main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+section {
+    background-color: #FFFFFF;
+    margin-bottom: 30px;
+    padding: 30px;
+    border-radius: 6px;
+    border: 1px solid var(--accent-color);
+}
+
+h1, h2, h3 {
+    color: var(--primary-color); /* Apply earth green to headings for consistency */
+    font-weight: 600;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #666666;
+    border-top: 1px solid var(--accent-color);
+    background-color: #FFFFFF;
+}
+
+/* Responsive design (Media Query for screens 800px and wider) */
+@media (min-width: 800px) {
+    .container {
+        display: flex;
+        gap: 20px;
+    }
+}
