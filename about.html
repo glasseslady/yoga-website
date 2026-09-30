@@ -3,8 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Riverbend Yoga Studio</title>
+    <title>About Us & Contact - Riverbend Yoga Studio</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* エラーメッセージ用のシンプルなスタイル */
+        .error-message {
+            color: #b33939;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #d3cbc0;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -22,9 +46,35 @@
     </header>
 
     <main class="container">
-        <h2>About Us</h2>
-        <p>At Riverbend Yoga Studio, we believe that yoga is for everyone. Our experienced instructors are dedicated to providing a safe, supportive, and nurturing environment for your practice.</p>
-        <img src="yoga-instructor_c.png" alt="Yoga Instructor" style="max-width: 100%; height: auto; border-radius: 8px; margin-top: 15px;">
+        <h2>About Riverbend Yoga Studio</h2>
+        <p>Our studio is dedicated to providing a welcoming, peaceful space for everyone to find balance, reduce stress, and reconnect with their inner peace.</p>
+        
+        <section style="margin-top: 30px;">
+            <h3>Contact Us</h3>
+            <p>Have questions or want to get in touch? Send us a message below.</p>
+            
+            <!-- バリデーション付きのお問い合わせフォーム -->
+            <form id="contactForm" onsubmit="return validateForm(event)" novalidate>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name">
+                    <span id="name-error" class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email">
+                    <span id="email-error" class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+                </div>
+
+                <button type="submit" style="background: #4a5d4e; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Send Message</button>
+            </form>
+        </section>
     </main>
 
     <footer>
@@ -32,5 +82,50 @@
             <p>&copy; 2026 Riverbend Yoga Studio. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- フォームバリデーションのJavaScript -->
+    <script>
+        function validateForm(event) {
+            // デフォルトの送信を一度止める
+            event.preventDefault();
+
+            let isValid = true;
+
+            // 1. 必須フィールド（お名前）のチェック
+            const nameInput = document.getElementById('name');
+            const nameError = document.getElementById('name-error');
+            if (nameInput.value.trim() === '') {
+                nameError.textContent = 'Please enter your name.';
+                isValid = false;
+            } else {
+                nameError.textContent = '';
+            }
+
+            // 2. メールアドレスの形式チェック
+            const emailInput = document.getElementById('email');
+            const emailError = document.getElementById('email-error');
+            // シンプルなメール形式の正規表現
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+            if (emailInput.value.trim() === '') {
+                emailError.textContent = 'Please enter your email address.';
+                isValid = false;
+            } else if (!emailInput.value.match(emailPattern)) {
+                emailError.textContent = 'Please enter a valid email address (e.g., example@domain.com).';
+                isValid = false;
+            } else {
+                emailError.textContent = '';
+            }
+
+            // すべてのチェックをクリアした場合
+            if (isValid) {
+                alert('Thank you! Your message has been successfully validated and sent.');
+                // フォームをリセット
+                document.getElementById('contactForm').reset();
+            }
+
+            return false;
+        }
+    </script>
 </body>
 </html>

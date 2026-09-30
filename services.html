@@ -25,15 +25,26 @@
         <h2>Our Services & Classes</h2>
         <p>Explore our wide range of classes designed for all levels, from gentle restorative sessions to dynamic flows.</p>
         
-        <section>
-            <h3>Gentle Flow</h3>
-            <p>A soothing, beginner-friendly class focusing on breathwork and slow, mindful movements.</p>
+        <!-- お気に入りリストを表示するエリア -->
+        <section id="favorites-section" style="background: #fdfbf7; padding: 15px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #d3cbc0;">
+            <h3>Your Favorite Classes</h3>
+            <ul id="favorites-list">
+                <!-- JavaScriptで動的に追加されます -->
+            </ul>
         </section>
 
-        <section>
+        <section class="class-card">
+            <h3>Gentle Flow</h3>
+            <p>A soothing, beginner-friendly class focusing on breathwork and slow, mindful movements.</p>
+            <button class="favorite-btn" onclick="toggleFavorite('Gentle Flow')">Add to Favorites</button>
+        </section>
+
+        <section class="class-card">
             <h3>Power Vinyasa</h3>
             <p>An energetic practice designed to build strength, flexibility, and endurance.</p>
             <img src="yoga-feature-large_c.png" alt="Power Vinyasa Class" style="max-width: 100%; height: auto; border-radius: 8px; margin-top: 15px;">
+            <br>
+            <button class="favorite-btn" onclick="toggleFavorite('Power Vinyasa')" style="margin-top: 15px;">Add to Favorites</button>
         </section>
     </main>
 
@@ -42,5 +53,51 @@
             <p>&copy; 2026 Riverbend Yoga Studio. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- JavaScriptによるお気に入り機能とlocalStorageの処理 -->
+    <script>
+        // 配列を使ってお気に入りを管理し、localStorageからデータを取得する
+        let favorites = JSON.parse(localStorage.getItem('yogaFavorites')) || [];
+
+        // ページが読み込まれたときに保存されたお気に入りを表示する
+        window.onload = function() {
+            displayFavorites();
+        };
+
+        // お気に入りを追加・削除する関数
+        function toggleFavorite(className) {
+            const index = favorites.indexOf(className);
+            if (index === -1) {
+                favorites.push(className);
+            } else {
+                favorites.splice(index, 1);
+            }
+            
+            // localStorageに保存する
+            localStorage.setItem('yogaFavorites', JSON.stringify(favorites));
+            
+            // 画面を動的に更新する
+            displayFavorites();
+        }
+
+        // 画面にお気に入りリストを描画する関数
+        function displayFavorites() {
+            const listElement = document.getElementById('favorites-list');
+            if (!listElement) return;
+            
+            listElement.innerHTML = '';
+            
+            if (favorites.length === 0) {
+                listElement.innerHTML = '<li>No favorites added yet. Click "Add to Favorites" on any class.</li>';
+                return;
+            }
+
+            favorites.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                listElement.appendChild(li);
+            });
+        }
+    </script>
 </body>
 </html>
